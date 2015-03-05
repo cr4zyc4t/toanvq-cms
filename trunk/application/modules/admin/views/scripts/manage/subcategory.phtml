@@ -1,0 +1,40 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="box box-info">
+            <div class="box-header">
+                <i class="fa fa-table"></i>
+                <h3 class="box-title">List Sub Category</h3>
+            </div><!-- /.box-header -->
+            <div class="box-body">
+            	<table class="table table-bordered table-striped dataTable">
+			    	<thead>
+						<?php
+							echo "<tr>";
+							foreach ($this->tableData['headers'] as $key => $header)
+							{
+								echo "<th class=\"th-col-$key\">$header</th>";
+							}
+							echo "</tr>";
+						?>
+					</thead>
+					<tbody>
+						<?php
+							foreach ($this->tableData['rows'] as $row)
+							{
+								echo "<tr>";
+								foreach ($row as $key => $col)
+								{
+									echo "<td class=\"col-$key\">$col</td>";
+								}
+								echo "</tr>";
+							}
+						?>
+					</tbody>
+			    </table>
+            </div><!-- /.box-body -->
+            <div class="box-footer">
+            	<a href="/admin/manage/addsubcategory?category_id=<?php echo $this->category_id; ?>" class="btn btn-primary">Add new</a>
+            </div>
+        </div><!-- /.box -->
+    </div><!-- /.col -->
+</div>

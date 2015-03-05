@@ -1,0 +1,60 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="box box-info">
+            <div class="box-header">
+                <h3 class="box-title">Add Category</h3>
+            </div><!-- /.box-header -->
+            <form role="form" action="/admin/manage/doaddcategory" method="post" enctype="multipart/form-data">
+            	<input type="hidden" name="type" value="<?php echo $this->type; ?>" />
+            	<input type="hidden" name="id" value="<?php echo $this->formData['id']; ?>" />
+                <div class="box-body">
+                    <div class="form-group">
+                        <label for="title">Title</label>
+                        <input type="text" class="form-control" name="title" id="title" placeholder="Enter Title" value="<?php echo $this->formData['title']; ?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="sort">Sort</label>
+                        <input type="text" class="form-control integer-input" name="sort" id="sort" value="<?php echo $this->formData['sort'] ?>">
+                    </div>
+                    <div class="form-group section-avatar">
+                        <label for="avatar">Avatar</label>
+                        <div class="img-container">
+                        	<img class="img_icon" src="<?php echo $this->formData['icon']?$this->formData['icon']:"/assets/img/blank.png" ?>" />
+                        	<img class="img_avatar1" src="<?php echo $this->formData['avatar1']?$this->formData['avatar1']:"/assets/img/blank.png" ?>" />
+                        	<img class="img_avatar2" src="<?php echo $this->formData['avatar2']?$this->formData['avatar2']:"/assets/img/blank.png" ?>" />
+                        	<img class="img_avatar3" src="<?php echo $this->formData['avatar3']?$this->formData['avatar3']:"/assets/img/blank.png" ?>" />
+                        </div>
+                        <div class="fileinput-container">
+                        	<label class="inline-label">
+	                        	Free Size:&nbsp;
+	                        </label>
+	                        <input type="file" name="img_icon" accept="image/*"/>
+                        </div>
+                        <div class="fileinput-container">
+                        	<label class="inline-label">
+	                        	128x128:&nbsp;
+	                        </label>
+	                        <input type="file" name="img_avatar1" accept="image/*"/>
+                        </div>
+                        <div class="fileinput-container">
+                        	<label class="inline-label">
+	                        	300x250:&nbsp;
+	                        </label>
+	                        <input type="file" name="img_avatar2" accept="image/*"/>
+                        </div>
+                        <div class="fileinput-container">
+                        	<label class="inline-label">
+	                        	300x125:&nbsp;
+	                        </label>
+	                        <input type="file" name="img_avatar3" accept="image/*"/>
+                        </div>
+                    </div>
+                </div><!-- /.box-body -->
+				
+                <div class="box-footer">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div><!-- /.box -->
+    </div><!-- /.col -->
+</div>

@@ -1,0 +1,42 @@
+<?php
+$news = $this->news;
+?>
+<link href="/assets/qplayvn/css/info.css"  rel='stylesheet' type='text/css'/>
+<div style="max-width: 960px; margin-top: 50px;width:100%;" class="sw-container">
+	<div>
+		<div class="sw-slide active" id="news_<?php echo $news['id']; ?>">
+			<h1 class="name_news info"><?php echo $news['title'] ?> </h1>
+			<div class="info_source">
+				<img src="<?php echo $news['source_icon']; ?>">
+				<h2 class="source"><?php echo $news['source_name']; ?></h2>
+				<div class="time"><?php echo timePass($news['time']); ?></div>
+			</div>
+			<a class="category_news" id="high_light_<?php echo $news['id']; ?>" onclick="high_light('<?php echo $news['id']; ?>')">Nổi bật</a>
+			<a class="category_news" id="delete_<?php echo $news['id']; ?>" onclick="delete_news('<?php echo $news['id']; ?>')">Xóa bài</a>
+			<div class="content_news">
+				<?php echo $news['content']; ?>
+				<div class="tags">
+					<a><img src="/assets/qplayvn/images/tag.png">Tags: </a>
+					<?php
+					foreach (explode(",", $news['tag']) as $tag) {
+						if ($tag) {
+							echo "<a href=\"/tag/".urlencode($tag).".html\">$tag</a>";
+						}
+					}
+					foreach (explode(",", $news['sys_tag']) as $tag) {
+						if ($tag) {
+							echo "<a href=\"/tag/".urlencode($tag).".html\">$tag</a>";
+						}
+					}
+					?>
+				</div>
+				<div>
+					<a class="share_button fa facebook" target="_blank" href="https://facebook.com/dialog/feed?app_id=666372686785470‏&display=popup&name=Didier+Drogba+%C4%91%C6%B0%E1%BB%A3c+Hi%E1%BB%87p+h%E1%BB%99i+c%C3%A2y+vi%E1%BA%BFt+b%C3%B3ng+%C4%91%C3%A1+vinh+danh&caption=%C4%90%E1%BB%8Dc+b%C3%A1o+v%E1%BB%9Bi+tin+t%E1%BB%A9c+c%E1%BA%ADp+nh%E1%BA%ADt+24h&picture=http%3A%2F%2Fhay.cafe24h.vn%2Fnews_data%2Fimages%2F2015-01-26%2F154c591e828353_480x270.jpg&description=Football+Writers%27+Association+%28FWA%29+hay+c%C3%B2n+%C4%91%C6%B0%E1%BB%A3c+g%E1%BB%8Di+l%C3%A0+Hi%E1%BB%87p+h%E1%BB%99i+c%C3%A1c+c%C3%A2y+vi%E1%BA%BFt+b%C3%B3ng+%C4%91%C3%A1+%C4%91%C3%A3+vinh+danh+nh%E1%BB%AFng+%C4%91%C3%B3ng+g%C3%B3p+c%E1%BB%A7a+ti%E1%BB%81n+%C4%91%E1%BA%A1o+Didier+Drogba+trong+nh%E1%BB%AFng+n%C4%83m+th%C3%A1ng+thi+%C4%91%E1%BA%A5u+t%E1%BA%A1i+Anh+v%C3%A0+CLB+Chelsea.Tham+d%E1%BB%B1+bu%E1%BB%95i+Gala+c%E1%BB%A7a+FWA+%E1%BB%9F+kh%C3%A1ch+s%E1%BA%A1n+Savoy+%28London%29+c%C3%B9ng+v%E1%BB%9Bi+Drogba+t%E1%BB%91i+Ch%E1%BB%A7+nh%E1%BA%ADt+v%E1%BB%ABa+qua+c%C3%B2n+c%C3%B3+s%E1%BB%B1+g%C3%B3p+m%E1%BA%B7t+c%E1%BB%A7a+HLV+Jose+Mourinho%2C+ng%C6%B0%E1%BB%9Di+%C4%91%C3%A3+mang+%22Voi+r%E1%BB%ABng%22+t%E1%BB%9Bi+Chelsea+v%E1%BB%9Bi+m%E1%BB%A9c+ph%C3%AD+24+tri%E1%BB%87u+b%E1%BA%A3ng+n%C4%83m+2004.Chia+s%E1%BA%BB+&link=http%3A%2F%2Fcafe24h.vn%2F77858%2FThe-thao%2FDidier-Drogba-duoc-Hiep-hoi-cay-viet-bong-da-vinh-danh.html&redirect_uri=http%3A%2F%2Fcafe24h.vn%2F77858%2FThe-thao%2FDidier-Drogba-duoc-Hiep-hoi-cay-viet-bong-da-vinh-danh.html" target="_blank" > </a>
+					<a class="share_button fa tw" target="_blank" href="https://twitter.com/intent/tweet?text=Tin nóng &url=http:///77858/The-thao/Didier-Drogba-duoc-Hiep-hoi-cay-viet-bong-da-vinh-danh.html&related=" target="_blank" > </a>
+					<a class="share_button fa goo" target="_blank" href="https://plus.google.com/share?url=/77858/The-thao/Didier-Drogba-duoc-Hiep-hoi-cay-viet-bong-da-vinh-danh.html" target="_blank" > </a>
+				</div>
+				<div id="fb-root"></div>
+			</div>
+		</div>
+	</div>
+</div>

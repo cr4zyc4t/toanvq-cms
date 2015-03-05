@@ -1,0 +1,133 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<title>Đọc báo với tin tức cập nhật 24h</title>
+		<meta name="keywords" content="đọc báo, doc bao, tin tức,tin tuc,dantri, vnexpress,tin bong da" >
+		<meta name="descriptions" content="Đọc báo với tin tức cập nhật 24h" >
+		<meta charset="UTF-8">
+		<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1.0" />
+		<meta name="HandheldFriendly" content="true" />
+		<link href='/assets/qplayvn/css/g_font_css.css' rel='stylesheet' type='text/css'>
+		<link href='/assets/qplayvn/css/g_font_css_2.css' rel='stylesheet' type='text/css'>
+		<link href="/assets/qplayvn/css/common.css" type="text/css" rel="stylesheet">
+		<link href="/assets/qplayvn/css/bootstrap.css" media="screen" rel="stylesheet" type="text/css" >
+		<link href="/assets/qplayvn/css/idangerous.swiper.css" media="screen" rel="stylesheet" type="text/css" >
+		<link href="/assets/qplayvn/css/home.css" media="screen" rel="stylesheet" type="text/css" >
+		<link href="/assets/qplayvn/css/swiper.css" media="screen" rel="stylesheet" type="text/css" >
+		<link rel="shortcut icon" href="/images/icon/favio.png" />
+		<link rel="icon" href="/images/icon/favio.png" />
+		
+		<script type="text/javascript" src="/assets/qplayvn/js/jquery-1.9.1.min.js"></script>
+		<script type="text/javascript" src="/assets/qplayvn/js/idangerous.swiper.js"></script>
+		<script type="text/javascript" src="/assets/qplayvn/js/jquery.grid-a-licious.js"></script>
+		<script type="text/javascript" src="/assets/qplayvn/js/scroll.js"></script>
+		<script type="text/javascript" src="/assets/qplayvn/js/common.js"></script>
+	</head>
+	<body>
+		<div  id="wapper">
+			<div id="background_header">
+				<div class="top_header clearfix">
+					<a class="logo" onclick="$('.menu_aside').toggle(100);$('#options').css('margin-left','-4px');"> <img
+					alt="Cafe24" src="/assets/qplayvn/images/icon/ic_drawer.png" id="options"> <img
+					alt="Cafe24" src="/assets/qplayvn/images/icon/cafe24.png" id="cafe24"> </a>
+					<nav class="menu_aside">
+						<a class="selected" href="/">Đọc tin</a>
+						<a href="http://yome.vn" target="_blank">Chơi game</a>
+					</nav>
+					<nav class="left menu menu_swiper">
+						<!-- MENU SUB -->
+						<div class="swiper-container">
+							<div class="swiper-wrapper" id="swiper-wrapper">
+								<?php
+								$active_key = 0;
+								foreach ($this->categories as $key => $category) {
+									$active = array("","");
+									if ($category['id'] == $this->selected_ctg_id) {
+										$active = array("active", '<hr class="line">');
+										$active_key = $key;
+									}
+									
+									if (!isset($category['url'])) {
+										$category['url'] = "/$category[id]/list/".str_replace(" ", "-", $category['title']).".html";
+									}
+									echo 
+									"<div class=\"swiper-slide \">
+										<div class=\"title\">
+											<a class=\"$active[0]\" href=\"$category[url]\" id=\"noi-bat-$key\">$category[title]</a>
+											$active[1]
+										</div>
+									</div>";
+								}
+								?>
+							</div>
+						</div>
+						<?php
+						switch (@$active_key%6) {
+							case 0:$class="noi_bat";break;
+							case 1:$class="the_gioi";break;
+							case 2:$class="cong_nghe";break;
+							case 3:$class="the_thao";break;
+							case 4:$class="giai_tri";break;
+							case 5:$class="doanh_nghiep";break;
+							default: $class="noi_bat";break;
+						}
+						?>
+						<script type="text/javascript">
+							var mySwiper;
+							$("#background_header").addClass("<?php echo $class?>");
+							$(document).ready(function(){
+								$("#footer").addClass("<?php echo $class?>");
+								//$(".swiper-container").css("width",$("#wapper").width());
+								mySwiper = new Swiper('.swiper-container', {
+									slidesPerView : 'auto',
+									watchActiveIndex : true,
+									useCSS3Transforms : false,
+								});
+								mySwiper.swipeTo(<?php echo $active_key; ?>);
+								grid();
+							});
+							function grid() {
+								$("#example").gridalicious({
+									gutter : 1,
+									width : 300,
+									/*animate: true,
+									 animationOptions: {
+									 speed: 200,
+									 duration: 300,
+									 },*/
+								});
+							}
+						</script>
+						<!-- END MENU SUB -->
+					</nav>
+					<div style="float:right;margin:10px;">
+						ADMIN | <a href="/auth/logout">Logout</a>
+					</div>
+				</div>
+			</div>
+			
+			<?php echo $this->layout()->content; ?>
+			
+			<div class="footer" id="footer">
+				<b>© 2014 SUNNET. ALL RIGHTS RESERVED.</b>
+				<br>
+				Chuyên trang của MXH <a target='_blank' href='http://chatyoyo.vn'>Chatyoyo.vn</a> - Giấy phép MXH số 37/GXN-TTĐT
+			</div>
+		</div>
+		<style type="text/css">
+			.footer {
+				font-family: arial;
+				color: white;
+				width: 100%;
+				max-width: 960px;
+				margin: auto;
+				padding: 10px;
+				overflow: hidden;
+			}
+			.footer a {
+				color: white;
+				text-decoration: underline;
+			}
+		</style>
+	</body>
+</html>

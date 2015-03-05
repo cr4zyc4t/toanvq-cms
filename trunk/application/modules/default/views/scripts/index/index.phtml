@@ -1,0 +1,29 @@
+<?php
+echo $this->formHidden("category_id",@$this->selected_ctg_id);
+?>
+<div id="content" style="min-height: 450px;">
+	<div id="example" class="row">
+		<?php
+		foreach ($this->newsList as $news) {
+			echo 
+			"<div class=\"item\" id=\"div_delete_$news[id]\">
+				<div class=\"box_news\">
+					<div class=\"center\">
+						<a href=\"/readnews/$news[id]/".urlTitle($news['title']).".html\"> <img alt =\"$news[title]\" class=\"image_news\" src=\"$news[icon]\"> </a>
+					</div>
+					<div class=\"info_news\">
+						<a href=\"/readnews/$news[id]/".urlTitle($news['title']).".html\"> <h1 class=\"name_news\">$news[title]</h1> </a>
+						<h2 class=\"category_news\">$news[category]</h2>
+						<a class=\"category_news\" id=\"delete_$news[id]\" onclick=\"delete_news('$news[id]')\">Xóa bài</a>
+						<h2 class=\"source\">$news[source]</h2>
+						<div class=\"time\">".timePass($news['time'])."</div>
+					</div>
+				</div>
+			</div>";
+		}
+		?>
+	</div>
+</div>
+<div class="loadmore">
+	<a class="btn btn-default btn-lg" onclick="loadMore(2)" id="btn_loadmore">Xem thêm</a>
+</div>

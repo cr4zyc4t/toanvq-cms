@@ -1,0 +1,226 @@
+<?php
+$formData = $this->formData;
+if (!isset($formData['time'])) {
+	$formData['time'] = $formData['created_time']  = date('Y-m-d H:i:s');
+}
+?><div class="row">
+    <div class="col-md-12">
+        <div class="box box-info">
+            <div class="box-header">
+                <h3 class="box-title">Add Content</h3>
+            </div><!-- /.box-header -->
+            <form role="form" action="/admin/manage/doaddcontent" method="post" enctype="multipart/form-data">
+            	<input type="hidden" name="subcategory_id" value="<?php echo $this->subcategory_id; ?>" />
+            	<input type="hidden" name="id" value="<?php echo $this->formData['id']; ?>" />
+            	<input type="hidden" name="url" id="content_url" value="<?php echo $this->formData['url']; ?>" />
+                <div class="box-body">
+                    <div class="form-group">
+                        <label for="title">Title</label>
+                        <input type="text" class="form-control" name="title" placeholder="Enter Title" value="<?php echo $this->formData['title']; ?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="title">Created Time</label>
+                        <input type="text" class="form-control hasDateTimePicker" name="created_time" value="<?php echo $formData['created_time']; ?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="title">Updated Time</label>
+                        <input type="text" class="form-control hasDateTimePicker" name="time" value="<?php echo $formData['time']; ?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea class="form-control" name="description" id="description" ><?php echo $this->formData['description'] ?></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="author">Author</label>
+                        <input type="text" class="form-control" name="author" placeholder="This content belongs to ..." value="<?php echo $this->formData['author']; ?>">
+                    </div>
+                    <div class="form-group section-avatar">
+                        <label for="avatar">Avatar</label>
+                        <div class="img-container">
+                        	<img class="img_icon" src="<?php echo $this->formData['icon']?$this->formData['icon']:"/assets/img/blank.png" ?>" />
+                        	<img class="img_avatar1" src="<?php echo $this->formData['avatar1']?$this->formData['avatar1']:"/assets/img/blank.png" ?>" />
+                        	<img class="img_avatar2" src="<?php echo $this->formData['avatar2']?$this->formData['avatar2']:"/assets/img/blank.png" ?>" />
+                        	<img class="img_avatar3" src="<?php echo $this->formData['avatar3']?$this->formData['avatar3']:"/assets/img/blank.png" ?>" />
+                        </div>
+                        <div class="fileinput-container">
+                        	<label class="inline-label">
+	                        	Free Size:&nbsp;
+	                        </label>
+	                        <input type="file" name="img_icon" accept="image/*"/>
+                        </div>
+                        <div class="fileinput-container">
+                        	<label class="inline-label">
+	                        	128x128:&nbsp;
+	                        </label>
+	                        <input type="file" name="img_avatar1" accept="image/*"/>
+                        </div>
+                        <div class="fileinput-container">
+                        	<label class="inline-label">
+	                        	300x250:&nbsp;
+	                        </label>
+	                        <input type="file" name="img_avatar2" accept="image/*"/>
+                        </div>
+                        <div class="fileinput-container">
+                        	<label class="inline-label">
+	                        	300x125:&nbsp;
+	                        </label>
+	                        <input type="file" name="img_avatar3" accept="image/*"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="content">
+                        	Content/URL -&nbsp;
+                        	<a class="pull-right" id="importPhotoBtn" href="/admin/manage/importphotoform?subcategory_id=<?php echo $this->subcategory_id; ?>" >Upload</a>
+                    	</label>
+                        <textarea class="form-control <?php if (!$this->noCKeditor) echo "hasCKEditor";?>" name="content" id="content" placeholder="Content or Youtube video URL"><?php echo $this->formData['content'] ?></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="content">Tag</label>
+                        <ul id="contentTag">
+                        	<?php
+                        	$tags = explode(",", $this->formData['tag']);
+                            if($tags){
+                                foreach ($tags as $tag) {
+                                    echo "<li>$tag</li>";
+                                }
+                            }
+                        	?>
+                        </ul>
+                    </div>
+                    <div class="form-group">
+                        <label for="content">Admin Tag</label>
+                        <ul id="sysTag">
+                        	<?php
+                        	$sys_tags = explode(",", $this->formData['sys_tag']);
+                            if($sys_tags){
+                                foreach ($sys_tags as $sys_tag) {
+                                    echo "<li>$sys_tag</li>";
+                                }
+                            }
+                        	?>
+                        </ul>
+                    </div>
+                    <div class="form-group">
+                        <label for="content">View</label>
+                        <input type="text" class="form-control integer-input" name="view" id="view" value="<?php echo $this->formData['view'] ?>" >
+                    </div>
+                    <div class="form-group">
+                        <label for="content">Like</label>
+                        <input type="text" class="form-control integer-input" name="like" id="like" value="<?php echo $this->formData['like'] ?>" >
+                    </div>
+                    <div class="form-group">
+                        <label for="content">Rank hot</label>
+                        <input type="text" class="form-control integer-input" name="rank_hot" id="rank_hot" value="<?php echo $this->formData['rank_hot'] ?>" >
+                    </div>
+                    <div class="form-group">
+                        <label for="content">Rank Interest</label>
+                        <input type="text" class="form-control integer-input" name="rank_interest" id="rank_interest" value="<?php echo $this->formData['rank_interest'] ?>" >
+                    </div>
+                    <div class="form-group">
+                        <label for="content">Rank Best</label>
+                        <input type="text" class="form-control integer-input" name="rank_best" id="rank_best" value="<?php echo $this->formData['rank_best'] ?>" >
+                    </div>
+                    <div class="form-group">
+                        <label for="content">Next Content</label>
+                        <input type="text" class="form-control" name="next_content" id="next_content" value="<?php echo $this->formData['next_content'] ?>" >
+                    </div>
+                    <div class="form-group">
+                        <label for="content">Prev Content</label>
+                        <input type="text" class="form-control" name="prev_content" id="prev_content" value="<?php echo $this->formData['prev_content'] ?>" >
+                    </div>
+                    <div class="form-group">
+                        <label for="content">Emotion</label>
+                        <input type="text" class="form-control" name="emotion" id="emotion" value="<?php echo $this->formData['emotion'] ?>" >
+                    </div>
+                    <div class="form-group">
+                    	<label for="content">Sexual</label>
+                    	<select name="sexual" class="form-control">
+                    		<option value="1" <?php if($this->formData['sexual'] == 1) echo "selected"; ?> >Male</option>
+                    		<option value="2" <?php if($this->formData['sexual'] == 2) echo "selected"; ?> >Female</option>
+                    		<option value="0" <?php if($this->formData['sexual'] == 0) echo "selected"; ?> >Both</option>
+                    	</select>
+                    </div>
+					<div class="form-group">
+                        <label for="content">Human Career</label>
+                        <input type="text" class="form-control " name="human_career" id="human_career" value="<?php echo $this->formData['human_career'] ?>" >
+                    </div>
+                    <div class="form-group">
+                        <label for="sort">Sort</label>
+                        <input type="text" class="form-control integer-input" name="sort" id="sort" value="<?php echo $this->formData['sort'] ?>" >
+                    </div>
+                </div><!-- /.box-body -->
+
+                <div class="box-footer">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div><!-- /.box -->
+    </div><!-- /.col -->
+</div>
+<script src="/assets/js/jquery.form.min.js"></script>
+<script>
+	$(function(){
+		$("#contentTag").tagit({
+			fieldName: "tags[]",
+			autocomplete: {
+				delay: 0,
+				source: <?php echo "[\"".implode("\",\"", $this->contenttags)."\"]"; ?>
+			}
+		});
+		$("#sysTag").tagit({
+			fieldName: "sys_tags[]",
+			autocomplete: {
+				delay: 0,
+				source: <?php echo "[\"".implode("\",\"", $this->contenttags)."\"]"; ?>
+			}
+		});
+	});
+	
+	$("#importPhotoBtn").click(function(e){
+		e.preventDefault();
+		
+		$("#mainModal").load(this.href, function(response){
+			$("#mainModal").modal({
+				keyboard : false,
+				backdrop : 'static'
+			});
+			
+			var bar = $('#importPhotoProgress');
+			var complete = $('#importPhotoProgress div.progress-bar');
+			var percent = $('#importPhotoProgress span.sr-only');
+			   
+			$('#importPhotoForm').ajaxForm({
+			    beforeSend: function() {
+			    	$("#importPhotoSubmit").hide();
+			    	$("#importPhotoForm").hide();
+			        bar.removeClass("hide").show();
+			        
+			        var percentVal = '0%';
+			        complete.attr("aria-valuenow",0).css("width", percentVal);
+			        percent.html(percentVal);
+			    },
+			    uploadProgress: function(event, position, total, percentComplete) {
+			        var percentVal = percentComplete + '%';
+			        complete.attr("aria-valuenow",percentComplete).css("width",percentVal);
+			        percent.html(percentVal);
+			    },
+			    success: function() {
+			        var percentVal = '100%';
+			        complete.attr("aria-valuenow",100).css("width",percentVal);
+			        percent.html(percentVal);
+			    },
+				complete: function(response) {
+					var response_obj = eval('(' +response.responseText+ ')');
+					
+					$('#mainModal .modal-body').append("<center>" + response_obj.desc + "</center>");
+					$("#mainModal .closeModalBtn").text("Close").click(function(){
+						CKEDITOR.instances.content.setData(CKEDITOR.instances.content.getData() + response_obj.uploaded);
+						$("input#content_url").val($("input#content_url").val() + ";" + response_obj.uploaded_path);
+					});
+				}
+			}); 
+			
+		});
+		
+	});
+</script>
