@@ -1,0 +1,76 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="box box-info">
+            <div class="box-body">
+            	<table id="sourcePageTable" class="table table-bordered table-striped display" cellspacing="0" width="100%">
+			    	<thead>
+						<?php
+							echo "<tr>";
+							foreach ($this->tableData['headers'] as $key => $header)
+							{
+								echo "<th class=\"th-col-$key\">$header</th>";
+							}
+							echo "</tr>";
+						?>
+					</thead>
+					<tbody>
+						<?php
+							foreach ($this->tableData['rows'] as $row)
+							{
+								echo "<tr>";
+								foreach ($row as $key => $col)
+								{
+									echo "<td class=\"col-$key\">$col</td>";
+								}
+								echo "</tr>";
+							}
+						?>
+					</tbody>
+			    </table>
+            </div><!-- /.box-body -->
+            <div class="box-footer">
+            	<a href="/admin/resource/addpage" class="btn btn-primary">Add New </a>
+            </div>
+        </div><!-- /.box -->
+    </div><!-- /.col -->
+</div>
+<script type="text/javascript" src="/js/table_tools.js"></script>
+<script>
+$(document).ready(function(){
+	$('#sourcePageTable').dataTable( {
+    	dom:"<'row'T>" +
+    		"<'row'<'col-sm-6'l><'col-sm-6'f>>" +
+			"<'row'<'col-sm-12'tr>>" +
+			"<'row'<'col-sm-6'i><'col-sm-6'p>>",
+        columns: [
+		            { data: "check", orderable: false },
+		            { data: "title" },
+		            { data: "homepage" },
+		            { data: "created_time" },
+		            { data: "control",orderable: false },
+		        ],
+        oTableTools: {
+            sRowSelect: "multi",
+			sRowSelector: 'td:first-child',
+            aButtons: [
+            	{
+	                "sExtends":    "select_all",
+	                "sButtonClass": "btn btn-default",
+               	},
+               	{
+	                "sExtends":    "select_none",
+	                "sButtonClass": "btn btn-default",
+               	},
+               	{
+	                "sExtends":    "select",
+	                "sButtonText": "Delete",
+	                "sButtonClass": "btn btn-danger",
+                    "fnClick": function ( nButton, oConfig, oFlash ) {
+                        deleteSelectedRows('sourcePageTable', 'page');
+                    }
+               	},
+            ]
+        }
+    } );
+});
+</script>

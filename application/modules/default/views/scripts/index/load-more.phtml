@@ -1,0 +1,115 @@
+<?php 
+	$params=$this->params;
+	$admin=$this->admin;
+	$position_ad=rand(0, 9);
+?>
+<div id="example<?php echo $params['page']?>" class="row">
+	<?php foreach($this->list_news as $key=>$news){
+		$date = new Zend_Date($news['time'],"yyyy-MM-dd HH:mm:ss");
+		$date_now =new Zend_Date();
+		$diff=$date_now->sub($date)->toValue();
+		$days = floor($diff/60/60/24);
+		$hours=floor(($diff-$days*24*60*60)/60/60);
+		$minutes=floor(($diff-$days*24*60*60-$hours*60*60)/60);
+		$seconds=floor(($diff-$days*24*60*60-$hours*60*60-$minutes*60));
+		if($days) $title=$days." ngày trước";
+		elseif($hours) $title=$hours. " giờ trước";
+		elseif($minutes) $title=$minutes. " phút trước";
+		elseif($seconds) $title=$seconds. " giây trước";
+		$link_detail="/readnews/$news[id]/".urlencode($news['title']).".html";
+		?>
+		<div class="item" id="div_delete_<?php echo $news['id']?>">
+			<div class="box_news">
+				<div class="center">
+					<a href="<?php echo $link_detail?>">
+						<img class="image_news" src="<?php echo $news['icon']?>">
+					</a>
+				</div>
+				<div class="info_news">
+					<a href="<?php echo $link_detail?>">
+						<h1 class="name_news"><?php echo $news['title']?></h1>
+					</a>
+					<h2 class="category_news"><?php echo $news['sub_category_name']?></h2>
+					<?php if($admin){?>
+						<?php if($news['high_light']!=1){?>
+							<a class="category_news" id="high_light_<?php echo $news['id']?>" onclick="high_light('<?php echo $news['id']?>')">Nổi bật</a>
+						<?php }?>
+						<a class="category_news" id="delete_<?php echo $news['id']?>" onclick="delete_news('<?php echo $news['id']?>')">Xóa bài</a>
+					<?php }else{?>
+					<?php }?>
+					<h2 class="source"><?php echo $news['source']?></h2>
+					<div class="time"><?php echo $title?></div>
+				</div>
+			</div>
+		</div>
+		<?php 
+		if($key==$position_ad && $params['page']==2 && $this->device){
+		/* $cpc=$this->cpc;
+		if($cpc->status==1 && $key==$position_ad){
+			$link_click=LINK_CPC_AMOBI."/api/chose-embed-banner-for-wap?
+			ip=".$_SERVER['SERVER_ADDR'].
+			"&ua=".$_SERVER['HTTP_USER_AGENT'].
+			"&session_code=".$cpc->content->session_code.
+			"&session_id=".$cpc->content->session_id.
+			"&link_id=".$cpc->content->list_banner[0]->id.
+			"&hash=".md5($_SERVER['SERVER_ADDR']."+".$cpc->content->list_banner[0]->id."+".$cpc->content->session_code."+".$cpc->content->session_id."+".$cpc->content->user_id).
+			"&user_id=".$cpc->content->user_id.
+			"&region=".$cpc->content->region.
+			"&city=".$cpc->content->city.
+			"&net=".$cpc->content->net.
+			"&package=".$cpc->content->package
+			; */
+		?>
+		<!-- AD AMOBI -->
+			<div class="item">
+				<div class="box_news">
+					<div class="center" style="height:250px;">
+						<a id="pre_load_132" target="_blank" href="http://amobi.vn"><img src='/images/icon/preload.jpg' style="height:250px !important;"></a>
+						<div id="amobi_widget_132" style="display: none; height: 250px;"></div>
+					    <script type="text/javascript">var is_load_amobi_lib = is_load_amobi_lib || 1;if(is_load_amobi_lib == 1) {is_load_amobi_lib = 2;if(typeof(jQuery)=='undefined') {document.write(unescape("%3Cscript src='http://amobi.vn/js/default/jquery-1.7.2.min.js' type='text/javascript'%3E%3C/script%3E"));}document.write(unescape("%3Cscript src='http://amobi.vn/js/default/amobi.min.js' type='text/javascript'%3E%3C/script%3E"));}</script>
+					    <script type="text/javascript" src="http://amobi.vn/default/index/widget?widget_id=132"></script>
+					    <style>#amobi_widget_132 iframe{display:none;}</style>
+					    <script type="text/javascript">
+					    	setTimeout(function(){ $("#pre_load_132").hide();},1500);
+						</script>
+					</div>
+					<div class="info_news">
+						<a>
+							<h1 class="category_news">Quảng cáo</h1>
+						</a>
+					</div>
+				</div>
+			</div>		
+		<!-- END AD AMOBI -->
+		<?php 
+		}
+		if($key==$position_ad && $params['page']==3 && $this->device){
+		?>
+		<!-- AD AMOBI -->
+			<div class="item">
+				<div class="box_news">
+					<div class="center" style="height:250px;">
+						<a id="pre_load_133" target="_blank" href="http://amobi.vn"><img src='/images/icon/preload.jpg' style="height:250px !important;"></a>
+						<div id="amobi_widget_133" style="display: none;height: 250px"></div>
+					    <script type="text/javascript">var is_load_amobi_lib = is_load_amobi_lib || 1;if(is_load_amobi_lib == 1) {is_load_amobi_lib = 2;if(typeof(jQuery)=='undefined') {document.write(unescape("%3Cscript src='http://amobi.vn/js/default/jquery-1.7.2.min.js' type='text/javascript'%3E%3C/script%3E"));}document.write(unescape("%3Cscript src='http://amobi.vn/js/default/amobi.min.js' type='text/javascript'%3E%3C/script%3E"));}</script>
+					    <script type="text/javascript" src="http://amobi.vn/default/index/widget?widget_id=133"></script>
+			    		<script type="text/javascript">
+			    			setTimeout(function(){ $("#pre_load_133").hide();},1500)
+						</script>
+					</div>
+					<div class="info_news">
+						<a>
+							<h1 class="category_news">Quảng cáo</h1>
+						</a>
+					</div>
+				</div>
+			</div>		
+		<!-- END AD AMOBI -->
+		<?php }?>
+	<?php 
+	}
+	?>
+</div>
+
+
+

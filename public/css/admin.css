@@ -1,0 +1,20 @@
+/*! 
+ *   Core v0.1
+ *   Author: vqt907
+!*/
+/*
+    Custom style from AdminLTE Style
+----------------------------
+*/
+/* SIDEBAR MENU - START */
+ul.sidebar-menu li.active{
+	z-index: 1000;
+	width: 221px;
+}
+ul.sidebar-menu li.active > a{
+	font-weight: bold;
+}
+.btn.pull-right{
+	margin-left: 10px;
+}
+/* SIDEBAR MENU - END */.content .table{	font-family: initial;}.section-avatar > .img-container{	height: 100px;	width: 100%;}.section-avatar > .img-container > img{	height: 100%;	max-width: 160px !important;	padding: 1px;	cursor: pointer;}.inline-label{	font-weight: normal;}.modal {	top: 20%;	margin: auto;}.content-header a{	color: black !important;}.dataTable tbody tr td:not(:last-child){	cursor: pointer;}.result-label{	font-weight: bold;}input.intable-input {	width: 39px !important;}.dt-bootstrap .DTTT{	padding: 0px 20px 10px 20px;}table.dataTable tr td.col-selector {    text-align: center;} table.dataTable tr td.col-selector:before {    content: "\f096"; /* fa-square-o */    font-family: FontAwesome;} table.dataTable tr.active td.col-selector:before {    content: "\f046"; /* fa-check-square-o */}.DTTT.btn-group{	width: 100%;}.DTTT.btn-group .btn-end-group{	border-top-right-radius: 3px !important;	border-bottom-right-radius: 3px !important;}.DTTT.btn-group .btn.standalone{	border-radius: 3px;}.DTTT.btn-group .btn.btn-primary{	color: #fff !important;	font-weight: bold;}

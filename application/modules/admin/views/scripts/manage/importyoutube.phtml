@@ -1,0 +1,27 @@
+<?php
+$formData = $this->formData;
+if (!isset($formData['time'])) {
+	$formData['time'] = date('Y-m-d H:i:s');
+}
+?><div class="row">
+    <div class="col-md-12">
+        <div class="box box-info">
+            <div class="box-header">
+                <h3 class="box-title">Add Content</h3>
+            </div><!-- /.box-header -->
+            <form role="form" action="/youtube/import/playlist" method="post">
+            	<input type="hidden" name="subcategory_id" value="<?php echo $this->subcategory_id; ?>" />
+                <div class="box-body">
+                    <div class="form-group">
+                        <label for="title">Playlist URL</label>
+                        <input type="text" class="form-control" name="url" placeholder="Enter Playlist URL">
+                    </div>
+                </div><!-- /.box-body -->
+
+                <div class="box-footer">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div><!-- /.box -->
+    </div><!-- /.col -->
+</div>

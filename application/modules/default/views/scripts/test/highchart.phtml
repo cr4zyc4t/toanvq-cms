@@ -1,0 +1,67 @@
+<script type="text/javascript">
+	$(function() {
+		$.ajax({
+			type : "GET",
+			dataType : 'json',
+			url : "/admin/report/highchartdata", // This is the URL to the API
+			data : {
+				days : 7
+			} // Passing a parameter to the API to specify number of days
+		}).done(function(data) {
+			// When the response to the AJAX request comes back render the chart with new data
+			// general_chart.setData(data);
+			// user_chart.setData(data);
+			// play_chart.setData(data);
+
+			$('#container').highcharts({
+				chart : {
+					type : 'spline'
+				},
+				title : {
+					text : 'Access report in 7 days',
+					x : -20 //center
+				},
+				xAxis : {
+					type: "datetime",
+					categories : data.labels,
+					tickInterval: 2*24*3600*1000
+				},
+				tooltip: {
+	                shared: true,
+	                crosshairs: true
+	            },
+				yAxis : {
+					title : {
+						text : 'Access count'
+					},
+					plotLines : [{
+						value : 0,
+						width : 1,
+						color : '#808080'
+					}]
+				},
+				legend : {
+					layout : 'vertical',
+					align : 'right',
+					verticalAlign : 'middle',
+					borderWidth : 0
+				},
+				series : data.series
+			});
+		}).fail(function() {
+			// If there is no communication between the server, show an error
+			alert("error occured");
+		});
+	}); 
+</script>
+<script src="/assets/plugins/highchart/js/highcharts.js"></script>
+<script src="/assets/plugins/highchart/js/modules/data.js"></script>
+<script src="/assets/plugins/highchart/js/modules/exporting.js"></script>
+
+<!-- Additional files for the Highslide popup effect -->
+<script type="text/javascript" src="http://www.highcharts.com/media/com_demo/highslide-full.min.js"></script>
+<script type="text/javascript" src="http://www.highcharts.com/media/com_demo/highslide.config.js" charset="utf-8"></script>
+<link rel="stylesheet" type="text/css" href="http://www.highcharts.com/media/com_demo/highslide.css" />
+
+<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
